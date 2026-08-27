@@ -6,8 +6,11 @@ from pydantic import BaseModel, Field
 from supabase import create_client, Client
 
 SUPABASE_URL=os.getenv('SUPABASE_URL','https://rrixdoasnqwkbruicvmo.supabase.co')
-SUPABASE_KEY=os.getenv('SUPABASE_KEY','')
-supabase: Client = create_client(SUPABASE_URL,SUPABASE_KEY) if SUPABASE_KEY else None
+SUPABASE_PUBLISHABLE_KEY = os.getenv("SUPABASE_PUBLISHABLE_KEY", "")
+supabase: Client = create_client(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+) if SUPABASE_PUBLISHABLE_KEY else None
 
 app=FastAPI(title='FinSight API', version='1.0.0')
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_credentials=False, allow_methods=['*'], allow_headers=['*'])
